@@ -1,2 +1,2 @@
 openshift==0.4.1
-kubernetes
+kubernetes~=4.0.0
