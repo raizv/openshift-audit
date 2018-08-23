@@ -1,10 +1,19 @@
 #!/usr/bin/env python2
-
-from openshift import client, config
+import openshift.client
+import os
 
 def main():
-    config.load_kube_config()
-    oapi = client.OapiApi()
+    api_token = os.environ['API_TOKEN']
+    api_host = os.environ['API_HOST']
+    verify_ssl = int(os.environ['VERIFY_SSL'])
+
+    configuration = openshift.client.Configuration()
+    configuration.api_key_prefix = {'authorization': 'Bearer'}
+    configuration.api_key = {'authorization': api_token}
+    configuration.host = api_host
+    configuration.verify_ssl = verify_ssl
+    api_client = openshift.client.ApiClient(configuration=configuration)
+    oapi = openshift.client.OapiApi(api_client)
 
     system_projects = ['default', 'kube-public', 'kube-system', 'logging', 'openshift', 'openshift-infra', 
         'openshift-node',  'openshift-web-console']
