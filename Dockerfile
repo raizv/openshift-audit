@@ -24,9 +24,8 @@ RUN set -ex && \
 COPY requirements.txt openshift-client.py /app/
 
 RUN set -ex && \
-    pip install -r requirements.txt
-    # && \
-    #apk del g++ make libffi libffi-dev python-dev openssl-dev
+    pip install -r requirements.txt && \
+    apk del g++ make libffi libffi-dev python-dev openssl-dev
 
 USER 1001
 ENTRYPOINT ["python2"]
