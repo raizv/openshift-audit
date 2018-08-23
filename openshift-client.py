@@ -2,6 +2,10 @@
 import openshift.client
 import os
 
+# disable ssl warninings
+import urllib3
+urllib3.disable_warnings()
+
 def main():
     api_token = os.environ['API_TOKEN']
     api_host = os.environ['API_HOST']
