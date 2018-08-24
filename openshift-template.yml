@@ -1,26 +1,26 @@
 apiVersion: v1
 kind: List
 metadata:
-  name: openshift-api-client-pipeline
+  name: openshift-audit-pipeline
 items:
 
 # Configure our Docker image repository
 - kind: ImageStream
   apiVersion: v1
   metadata:
-    name: openshift-api-client
+    name: openshift-audit
     labels:
-      app: openshift-api-client
+      app: openshift-audit
 
 # Configure our build pipeline template
 - apiVersion: v1
   kind: Template
   metadata:
-    name: openshift-api-client-pipeline
+    name: openshift-audit-pipeline
   parameters:
   - name: GIT_REPO
     description: Source repository
-    value: https://github.com/raizv/openshift-api-client.git
+    value: https://github.com/raizv/openshift-audit.git
   - name: GIT_BRANCH
     description: Branch to build from
     value: master
@@ -30,9 +30,9 @@ items:
   # - apiVersion: v1
   #   kind: BuildConfig
   #   metadata:
-  #     name: openshift-api-client-pipeline
+  #     name: openshift-audit-pipeline
   #     labels:
-  #       app: openshift-api-client
+  #       app: openshift-audit
   #   spec:
   #     source:
   #       type: Git
@@ -55,9 +55,9 @@ items:
   - kind: BuildConfig
     apiVersion: v1
     metadata:
-      name: openshift-api-client
+      name: openshift-audit
       labels:
-        app: openshift-api-client
+        app: openshift-audit
     spec:
       source:
         type: Git
@@ -78,5 +78,5 @@ items:
       output:
         to:
           kind: ImageStreamTag
-          name: openshift-api-client:latest
+          name: openshift-audit:latest
 
