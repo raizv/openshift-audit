@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: List
 metadata:
-  name: openshift-audit-pipeline
+  name: openshift-audit
 items:
 
 # Configure our Docker image repository
@@ -12,11 +12,11 @@ items:
     labels:
       app: openshift-audit
 
-# Configure our build pipeline template
+# Configure our build template
 - apiVersion: v1
   kind: Template
   metadata:
-    name: openshift-audit-pipeline
+    name: openshift-audit
   parameters:
   - name: GIT_REPO
     description: Source repository
