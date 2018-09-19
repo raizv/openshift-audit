@@ -4,7 +4,7 @@ cd `dirname $0`
 
 # Installs the build pipeline for a given branch (default: master) in your currently selected OpenShift project
 # See: README.md
-BRANCH=${1:-master}
+GIT_BRANCH=${1:-master}
 APP_NAME=${2:-openshift-audit}
 ENVIRONMENT=${3:-dev}
 
@@ -13,7 +13,7 @@ ENVIRONMENT=${3:-dev}
 
 # Apply and execute the OpenShift template
 oc apply -f openshift-template.yml
-oc process ${APP_NAME} BRANCH=${BRANCH}| oc apply -f -
+oc process ${APP_NAME} GIT_BRANCH=${GIT_BRANCH}| oc apply -f -
 oc start-build ${APP_NAME}
 
 # Create service account and get api token
