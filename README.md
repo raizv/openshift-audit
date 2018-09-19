@@ -18,16 +18,20 @@ oc config current-context | cut -d/ -f1
 ```
 
 ### API Token
-``` 
+```
 # create service account
-oc create serviceaccount ${APP_NAME}
+oc create sa openshift-audit
 
-# add role to service account
-oc policy add-role-to-user admin system:serviceaccounts:default:${APP_NAME}
+# add cluster-reader role to service account
+oc adm policy add-cluster-role-to-user cluster-reader system:serviceaccount:default:openshift-audit
 
 # get api token
-oc serviceaccounts get-token ${APP_NAME}
+oc sa get-token openshift-audit
 ```
+
+## Openshift Secret to get API access
+```
+oc create secret generic openshift-audit-dev --from-literal=token=$(oc sa get-token openshift-audit) --dry-run -o yaml | oc apply -f -
 
 ## Usage
 ```
