@@ -19,6 +19,7 @@ oc run ${APP_NAME} \
     "containers":[{
       "name": "'${APP_NAME}'",
       "image": "'${IMAGESTREAM}'",
+      "command":["python3", "deployments.py"],
       "env":[{
         "name":"API_HOST",
         "valueFrom":{

@@ -26,30 +26,30 @@ items:
     value: master
   objects:
 
-  # # Configures the OpenShift/Jenkins build pipeline
-  # - apiVersion: v1
-  #   kind: BuildConfig
-  #   metadata:
-  #     name: openshift-audit-pipeline
-  #     labels:
-  #       app: openshift-audit
-  #   spec:
-  #     source:
-  #       type: Git
-  #       git:
-  #         uri: ${GIT_REPO}
-  #         ref: ${GIT_BRANCH}
-  #       sourceSecret:
-  #         name: github-secret
-  #     triggers:
-  #       - type: GitHub
-  #         github:
-  #           secret: supersectet
-  #     runPolicy: SerialLatestOnly
-  #     strategy:
-  #       type: JenkinsPipeline
-  #       jenkinsPipelineStrategy:
-  #         jenkinsfilePath: Jenkinsfile
+  # Configures the OpenShift/Jenkins build pipeline
+  - apiVersion: v1
+    kind: BuildConfig
+    metadata:
+      name: openshift-audit-pipeline
+      labels:
+        app: openshift-audit
+    spec:
+      source:
+        type: Git
+        git:
+          uri: ${GIT_REPO}
+          ref: ${GIT_BRANCH}
+        sourceSecret:
+          name: github-secret
+      triggers:
+        - type: GitHub
+          github:
+            secret: supersectet
+      runPolicy: SerialLatestOnly
+      strategy:
+        type: JenkinsPipeline
+        jenkinsPipelineStrategy:
+          jenkinsfilePath: Jenkinsfile
 
   # Configure our Docker container build
   - kind: BuildConfig
